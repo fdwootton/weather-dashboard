@@ -1,0 +1,17 @@
+
+
+.weather-result {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.hide {
+  display:none;
+}
+
+@media (min-width: 576px) {
+    .jumbotron {
+      padding: 10px;
+  }
+  }
