@@ -4,24 +4,23 @@ $(".search-button").on("click", function (event) {
     event.preventDefault();
 
     var userInput = $(this).siblings("input").val();
-    var storedSearchItems = localStorage.getItem("searchItems");
+    var storedSearchItems = JSON.parse(localStorage.getItem("searchItems"));
 
-    // if (userInput) {
-    //     localStorage.setItem("searchItem", userInput);
-    // }
-
-    // else {
-    //     return;
-    // }
-
-    if (storedSearchItems) {
-        storedSearchItems.push(userInput);
+    if (userInput) {
+        if (storedSearchItems) {
+            storedSearchItems.push(userInput);
+        }
+    
+        else {
+            storedSearchItems = [];
+            storedSearchItems.push(userInput);
+        }
+    
+        localStorage.setItem("searchItems", JSON.stringify(storedSearchItems));
     }
 
     else {
-        storedSearchItems = [];
-        storedSearchItems.push(userInput);
+        return;
     }
 
-    localStorage.setItem("searchItems", JSON.stringify(storedSearchItems));
 });
