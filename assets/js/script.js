@@ -17,6 +17,9 @@ $(".search-button").on("click", function (event) {
         }
     
         localStorage.setItem("searchItems", JSON.stringify(storedSearchItems));
+        $('#search-history').append($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');;
+        userInput.val("");
+        
     }
 
     else {
