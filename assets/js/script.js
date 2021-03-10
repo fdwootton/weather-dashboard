@@ -1,4 +1,3 @@
-
 // ----- When user clicks the search button-------
 $(".search-button").on("click", function (event) {
     event.preventDefault();
