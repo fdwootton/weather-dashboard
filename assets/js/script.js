@@ -6,6 +6,7 @@ $(".search-button").on("click", function (event) {
     var storedSearchItems = JSON.parse(localStorage.getItem("searchItems"));
 
     if (userInput) {
+        
         if (storedSearchItems) {
             storedSearchItems.push(userInput);
         }
@@ -21,5 +22,4 @@ $(".search-button").on("click", function (event) {
     else {
         return;
     }
-
 });
