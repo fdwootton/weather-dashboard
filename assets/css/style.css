@@ -22,8 +22,6 @@ a {
 
 #weather-container {
   display: flex;
-  /* margin: auto;
-  width: 50%; */
   justify-content: center;
 }
 
@@ -36,6 +34,12 @@ a {
 
 .hide {
   display:none;
+}
+
+.uv-index span {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
 }
 
 @media (min-width: 576px) {

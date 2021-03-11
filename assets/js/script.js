@@ -1,3 +1,5 @@
+const apiKey = "8a73232fcd06372324159654883c0590";
+
 // ----- When user clicks the search button-------
 $(".search-button").on("click", function (event) {
     event.preventDefault();
@@ -41,14 +43,13 @@ $(".search-button").on("click", function (event) {
 
 function getCurrentWeather (userInput) {
 
-    var apiKey = "8a73232fcd06372324159654883c0590";
     var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput + '&units=imperial&appid=' + apiKey;
 
     fetch(apiUrl)
 
         .then (function (response) {
             // Turns the response into a JavaScript Object
-            return response.json()
+            return response.json() 
         })
 
         .then(function (data) {
@@ -91,8 +92,9 @@ function getCurrentWeather (userInput) {
             console.log(data);
 
             var uvIndex = data.current.uvi;
-    
-            $('.uv-index').html("UV Index: " + uvIndex);
+            $('.uv-index').html("UV Index: ").append('<span></span>');
+
+            setUvIndexColor(uvIndex);
         })
 
         .catch (function (error){
@@ -102,9 +104,29 @@ function getCurrentWeather (userInput) {
 
 
 
+// The background color of the UV-Index changes based on severity
+function setUvIndexColor (uvIndex) {
 
+    if (uvIndex >= 11) {
+        $('.uv-index span').html(uvIndex).css('background-color' , 'violet');
+    }
 
+    else if ((uvIndex < 11) && (uvIndex >= 8)) {
+        $('.uv-index span').html(uvIndex).css({'color': 'white' , 'background':'red'});
+    }
 
+    else if ((uvIndex < 8) && (uvIndex >= 6)) {
+        $('.uv-index span').html(uvIndex).css('background-color' , 'orange');
+    }
+
+    else if ((uvIndex < 6) && (uvIndex >= 3)) {
+        $('.uv-index span').html(uvIndex).css('background-color' , 'yellow');
+    }
+
+    else {
+        $('.uv-index span').html(uvIndex).css('background-color' , 'green');
+    }
+}
 
 // For five day forecast:
 // api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={cnt}&appid={API key}
