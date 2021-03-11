@@ -54,6 +54,7 @@ function getCurrentWeather (userInput) {
         .then(function (data) {
             console.log(data);
             var cityName = data.name;
+            var weatherIcon = data.weather[0].icon;
             var currentTemp = data.main.temp;
             var currentHumidity = data.main.humidity;
             var windSpeed = data.wind.speed;
@@ -63,7 +64,8 @@ function getCurrentWeather (userInput) {
 
             // var currentDate = moment()format
             // add weather icon
-            $('.city-name').html(cityName);
+            $('.city-name-and-date').html(cityName + " (" + moment().format("M/D/YY") + ")");
+            $('.weather-icon').html(weatherIcon);
             $('.current-temp').html("Temperature: " + currentTemp + " <span>&#176;</span>" + "F");
             $('.current-humidity').html("Humidity: " + currentHumidity + "%");
             $('.wind-speed').html("Wind Speed: " + windSpeed + " MPH");
