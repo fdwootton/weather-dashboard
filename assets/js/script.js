@@ -64,10 +64,10 @@ function getCurrentWeather (userInput) {
             // var currentDate = moment()format
             // add weather icon
             $('.city-name').html(cityName);
-            $('.current-temp').html("Temperature: " + currentTemp + "<span>&#176;</span>" + "F");
+            $('.current-temp').html("Temperature: " + currentTemp + " <span>&#176;</span>" + "F");
             $('.current-humidity').html("Humidity: " + currentHumidity + "%");
             $('.wind-speed').html("Wind Speed: " + windSpeed + " MPH");
-            $('#weather-container').removeClass('hide');
+            $('.weather-result').removeClass('hide');
 
             // This fetches API that contains uv-index
             return fetch(uvIndexApiUrl)
