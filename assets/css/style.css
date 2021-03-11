@@ -22,15 +22,16 @@ a {
 
 #weather-container {
   display: flex;
-  margin: auto;
-  width: 50%;
+  /* margin: auto;
+  width: 50%; */
+  justify-content: center;
 }
 
 .weather-result {
   border: 1px solid black;
   border-radius: 5px;
   margin: 5px;
-  padding: 20px;
+  padding: 10px;
 }
 
 .hide {
