@@ -57,41 +57,46 @@ function getCurrentWeather (userInput) {
             var currentTemp = data.main.temp;
             var currentHumidity = data.main.humidity;
             var windSpeed = data.wind.speed;
-
-            // getUvIndex();
+            var latitude = data.coord.lat;
+            var longitude = data.coord.lon;
+            var uvIndexApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey; //API that contain uv-index
 
             // var currentDate = moment()format
+            // add weather icon
             $('.city-name').html(cityName);
             $('.current-temp').html("Temperature: " + currentTemp + "<span>&#176;</span>" + "F");
             $('.current-humidity').html("Humidity: " + currentHumidity + "%");
             $('.wind-speed').html("Wind Speed: " + windSpeed + " MPH");
             $('#weather-container').removeClass('hide');
+
+            // This fetches API that contains uv-index
+            return fetch(uvIndexApiUrl)
+
             })
 
-        .catch (function (err){
+            
+            
+        
+        .then (function (response) {
+            return response.json()
+        })
+
+        .then (function (data) {
+            console.log(data);
+
+            var uvIndex = data.current.uvi;
+    
+            $('.uv-index').html("UV Index: " + uvIndex);
+        })
+
+        .catch (function (error){
             alert("Unable to find city. Please check for spelling errors.");
         })   
 };
 
 
-// function getUvIndex () {
 
-//     var latitude = data.coord.lat;
-//     var longitude = data.coord.lon;
-//     var uvIndexApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
 
-//     fetch(uvIndexApiUrl)
-
-//         .then (function (response) {
-//             return response.json()
-//         })
-
-//         .then (function (data) {
-
-//         })
-                
-            
-// }
 
 
 
