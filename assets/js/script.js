@@ -50,8 +50,13 @@ function getCurrentWeather (userInput) {
             console.log(data);
             var cityName = data['name'];
             var currentTemp = data['main']['temp'];
+            var currentHumidity = data['main']['humidity'];
+            var windSpeed = data['wind']['speed'];
+            // var currentDate = moment()format
             $('.city-name').html(cityName);
-            $('.current-temp').html(currentTemp);
+            $('.current-temp').html("Temperature: " + currentTemp);
+            $('.current-humidity').html("Humidity: " + currentHumidity + "%");
+            $('.wind-speed').html("Wind Speed: " + windSpeed + " MPH");
             $('#weather-container').removeClass('hide');
             })
         .catch (function (err){
