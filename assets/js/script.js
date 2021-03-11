@@ -41,22 +41,22 @@ $(".search-button").on("click", function (event) {
 function getCurrentWeather (userInput) {
 
     var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput + '&appid=8a73232fcd06372324159654883c0590';
-  
+
     fetch(apiUrl)
-//         .then(function (response) {
-//             if (response.ok) {
-//             console.log(response);
-    //       response.json().then(function (data) {
-    //         console.log(data);
-    //         displayCurrentWeather(data, user);
-    //       });
-    //     } else {
-    //       alert('Error: ' + response.statusText);
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     alert('Unable to connect to find city. Please check for spelling errors.');
-    //   });
+        .then (function (response) {
+            return response.json()
+        })
+        .then(function (data) {
+            console.log(data);
+            var cityName = data['name'];
+            var currentTemp = data['main']['temp'];
+            $('.city-name').html(cityName);
+            $('.current-temp').html(currentTemp);
+            $('#weather-container').removeClass('hide');
+            })
+        .catch (function (err){
+            alert("Unable to find city. Please check for spelling errors.");
+        })   
 };
 
 
