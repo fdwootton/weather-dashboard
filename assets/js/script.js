@@ -53,19 +53,27 @@ function getCurrentWeather (userInput) {
 
         .then(function (data) {
             console.log(data);
+            
             var cityName = data.name;
-            var weatherIcon = data.weather[0].icon;
             var currentTemp = data.main.temp;
             var currentHumidity = data.main.humidity;
             var windSpeed = data.wind.speed;
             var latitude = data.coord.lat;
             var longitude = data.coord.lon;
+
+            var currentWeatherIcon = $("<img>")
+            currentWeatherIcon.attr("src" , "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+            $('.current-weather-icon').empty();
+            $('.current-weather-icon').append(currentWeatherIcon);
+            
+
             var uvIndexApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey; //API that contain uv-index
 
             // var currentDate = moment()format
             // add weather icon
-            $('.city-name-and-date').html(cityName + " (" + moment().format("M/D/YY") + ")");
-            $('.weather-icon').html(weatherIcon);
+            
+            $('.city-name-and-date').html(cityName + " (" + moment().format("M/D/YYYY") + ")");
+            // $('.weather-icon').html(weatherIcon);
             $('.current-temp').html("Temperature: " + currentTemp + " <span>&#176;</span>" + "F");
             $('.current-humidity').html("Humidity: " + currentHumidity + "%");
             $('.wind-speed').html("Wind Speed: " + windSpeed + " MPH");
