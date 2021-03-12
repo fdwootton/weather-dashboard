@@ -18,7 +18,7 @@ $(".search-button").on("click", function (event) {
             storedSearchItems.push(userInput);
         }
         
-        getCurrentWeather(userInput);
+        getWeather(userInput);
 
         // Puts user input into local storage
         localStorage.setItem("searchItems", JSON.stringify(storedSearchItems));
@@ -38,13 +38,14 @@ $(".search-button").on("click", function (event) {
 });
 
 
-// api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-// API key is 8a73232fcd06372324159654883c0590
 
-function getCurrentWeather (userInput) {
+// This function uses fetch three times for three different URLs
+function getWeather (userInput) {
 
     var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput + '&units=imperial&appid=' + apiKey;
+    var forecastUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily?q=' + userInput + '&cnt=5&appid=' + apiKey;
 
+    // First fetch
     fetch(apiUrl)
 
         .then (function (response) {
@@ -59,8 +60,9 @@ function getCurrentWeather (userInput) {
             var currentTemp = data.main.temp;
             var currentHumidity = data.main.humidity;
             var windSpeed = data.wind.speed;
-            var latitude = data.coord.lat;
-            var longitude = data.coord.lon;
+
+            var latitude = data.coord.lat; //need this data to perform the second fetch
+            var longitude = data.coord.lon; //need this data to perform the second fetch
 
             var currentWeatherIcon = $("<img>")
             currentWeatherIcon.attr("src" , "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
@@ -76,13 +78,10 @@ function getCurrentWeather (userInput) {
             $('.wind-speed').html("Wind Speed: " + windSpeed + " MPH");
             $('.weather-result').removeClass('hide');
 
-            // This fetches API that contains uv-index
+            //Second fetch ---> This fetches new API URL that contains uv-index
             return fetch(uvIndexApiUrl)
 
             })
-
-            
-            
         
         .then (function (response) {
             return response.json()
@@ -92,13 +91,19 @@ function getCurrentWeather (userInput) {
             console.log(data);
 
             var uvIndex = data.current.uvi;
+
+            // creates a new <span> element that will contain the uv-index number
             $('.uv-index').html("UV Index: ").append('<span></span>');
 
             setUvIndexColor(uvIndex);
+
+            // Third fetch ----> This fetches URL that contains forecast
+            return fetch(forecastUrl)
         })
 
         .catch (function (error){
-            alert("Unable to find city. Please check for spelling errors.");
+            $('.weather-result').addClass('hide');
+            return;
         })   
 };
 
@@ -126,7 +131,7 @@ function setUvIndexColor (uvIndex) {
     else {
         $('.uv-index span').html(uvIndex).css('background-color' , 'green');
     }
-}
+};
 
 // For five day forecast:
 // api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={cnt}&appid={API key}
