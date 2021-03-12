@@ -32,6 +32,14 @@ a {
   padding: 10px;
 }
 
+.forecast-box {
+  margin: 10px;
+  height: 200px;
+  width: 150px;
+  background-color: blue;
+  border-radius: 5px;
+}
+
 .hide {
   display:none;
 }
