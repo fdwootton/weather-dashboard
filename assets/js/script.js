@@ -84,9 +84,9 @@ function getWeather (userInput) {
             $('.wind-speed').html("Wind Speed: " + windSpeed + " MPH");
             $('.weather-result').removeClass('hide');
 
+            
 
-            // Creation of the five-day forecast
-            renderForecast();
+
 
 
             //Second fetch ---> This fetches new API URL that contains uv-index
@@ -106,7 +106,11 @@ function getWeather (userInput) {
             // creates a new <span> element that will contain the uv-index number
             $('.uv-index').html("UV Index: ").append('<span></span>');
 
-            setUvIndexColor(uvIndex);
+            setUvIndexColor(uvIndex); //function changes background color of uv-index
+
+            console.log(data.daily[0].temp.min);
+
+            renderForecast(); // function that creates the five-day forecast
 
         })
 
@@ -159,6 +163,21 @@ function renderForecast () {
         $(this).css('color', 'white').html(forecastDate);
         day ++;
     });
+
+
+    // displays the weather icon for each blue box
+    
+
+    // var iconLine = $('.forecast-icon');
+
+    // iconLine.each(function(){
+    //     var index = 0;
+    //     var forecastWeatherIcon = $("<img>")
+    //     forecastWeatherIcon.attr("src" , "https://openweathermap.org/img/w/" + data.weather[index].icon + ".png");
+    //     $('.current-weather-icon').empty();
+    //     $('.current-weather-icon').append(forecastWeatherIcon);
+    //     index++;
+    // })
     
  
                
