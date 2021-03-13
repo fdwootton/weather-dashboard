@@ -25,6 +25,7 @@ $(".search-button").on("click", function (event) {
 
         // Adds the most recent search item (last in array) to the "Search Again:" line on the page
         $('#search-history').append($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');
+        $('#search-history').children('button').addClass('searchItem');
 
         
         // Clears the search box after search button is clicked
@@ -144,7 +145,7 @@ function setUvIndexColor (uvIndex) {
     }
 
     else {
-        $('.uv-index span').html(uvIndex).css('background-color' , 'green');
+        $('.uv-index span').html(uvIndex).css({'color': 'white' , 'background':'green'});
     }
 };
 

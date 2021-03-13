@@ -9,6 +9,7 @@ a {
 
 #search-history {
   margin-top: 0;
+  width: 850px;
 }
 
 #search-history button {
@@ -44,6 +45,10 @@ a {
   background-color: blue;
   color: white;
   border-radius: 5px;
+}
+
+#nav-container {
+  width:700px;
 }
 
 .hide {
