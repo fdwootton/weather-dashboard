@@ -55,27 +55,39 @@ function getWeather (userInput) {
         .then(function (data) {
             console.log(data);
 
+            // variables for current weather
             var cityName = data.name;
             var currentTemp = data.main.temp;
             var currentHumidity = data.main.humidity;
             var windSpeed = data.wind.speed;
 
+            // variables for five-day forecast
+            // var dayOne = data.daily[0].temp.max
+
             var latitude = data.coord.lat; //need this data to perform the second fetch
             var longitude = data.coord.lon; //need this data to perform the second fetch
 
+            // Current weather icon
             var currentWeatherIcon = $("<img>")
             currentWeatherIcon.attr("src" , "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
             $('.current-weather-icon').empty();
             $('.current-weather-icon').append(currentWeatherIcon);
-            
 
+            
+            // second API url to be fetched
             var uvIndexApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&units=imperial&appid=' + apiKey; //API that contains uv-index
             
+            // Creation of the current weather display (minus uv-index)
             $('.city-name-and-date').html(cityName + " (" + moment().format("M/D/YYYY") + ")");
             $('.current-temp').html("Temperature: " + currentTemp + " <span>&#176;</span>" + "F");
             $('.current-humidity').html("Humidity: " + currentHumidity + "%");
             $('.wind-speed').html("Wind Speed: " + windSpeed + " MPH");
             $('.weather-result').removeClass('hide');
+
+
+            // Creation of the five-day forecast
+
+
 
             //Second fetch ---> This fetches new API URL that contains uv-index
             return fetch(uvIndexApiUrl)

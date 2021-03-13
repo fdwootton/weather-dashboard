@@ -9,7 +9,6 @@ a {
 
 #search-history {
   margin-top: 0;
-  margin-bottom: 20px;
 }
 
 #search-history button {
@@ -28,15 +27,19 @@ a {
 }
 
 .weather-result {
-  border: 1px solid black;
-  border-radius: 5px;
   margin: 5px;
   padding: 10px;
 }
 
+
+#future-weather {
+  display: flex;
+  justify-content: center;
+}
+
 .forecast-box {
   margin: 10px;
-  height: 200px;
+  height: 150px;
   width: 150px;
   background-color: blue;
   border-radius: 5px;
