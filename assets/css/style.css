@@ -33,11 +33,11 @@ a {
 
 
 #future-weather {
-  /* display: flex; */
   justify-content: center;
 }
 
 .forecast-box {
+  text-align: center;
   margin: 10px;
   height: 150px;
   width: 150px;
