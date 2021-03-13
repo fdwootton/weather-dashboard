@@ -25,7 +25,7 @@ $(".search-button").on("click", function (event) {
 
         // Adds the most recent search item (last in array) to the "Search Again:" line on the page
         $('#search-history').append($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');
-        $('#search-history').children('button').addClass('searchItem');
+        $('#search-history').children('button').addClass('searched-item');
 
         
         // Clears the search box after search button is clicked
@@ -37,6 +37,24 @@ $(".search-button").on("click", function (event) {
         return;
     }
 });
+
+
+
+
+// When a previously searched city is clicked:
+$(".searched-item").on("click", function (event) {
+
+    event.preventDefault();
+
+    console.log("button was clicked");
+
+    // var cityName = $(this).val()
+    // console.log(cityName);
+
+});
+
+
+
 
 
 
@@ -162,8 +180,8 @@ function renderForecast () {
     
     dateLine.each(function () { //displays the date for each blue box
         
-        var forecastTemp = 95
-        var forecastHumidity = 34
+        var forecastTemp = "--" //(data.daily[index].temp.max); index++
+        var forecastHumidity = "--" // (data.daily[index].humidity); index++
         var day = 1;
         var forecastDate = todayDate.add(day, 'days').format("M/D/YYYY");
         $(this).html(forecastDate)
@@ -172,4 +190,3 @@ function renderForecast () {
         day ++;
     });
 };
-
