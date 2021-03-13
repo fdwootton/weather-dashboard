@@ -42,6 +42,7 @@ a {
 
 
 #future-weather {
+  display: flex;
   justify-content: center;
 }
 
@@ -53,7 +54,6 @@ a {
   background-color: rgb(35, 35, 190);
   color: white;
   border-radius: 5px;
-  /* border: 4px double #cccccc; */
 }
 
 #nav-container {
@@ -61,7 +61,7 @@ a {
 }
 
 .hide {
-  display:none;
+  visibility: hidden;
 }
 
 .uv-index span {

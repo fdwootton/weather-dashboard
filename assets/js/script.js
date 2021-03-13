@@ -169,9 +169,6 @@ function setUvIndexColor (uvIndex) {
 
 function renderForecast (data) {
 
-    $('#future-weather').css('display', 'flex') //displays the five blue boxes, centered
-
-    
     var dateLine = $('.forecast-date');
     var todayDate = moment();
     var index = 0
@@ -189,9 +186,12 @@ function renderForecast (data) {
         $(this).html(forecastDate)
         .siblings('.forecast-temp').html("Temp: " + forecastTemp + " <span>&#176;</span>" + "F")
         .siblings('.forecast-humidity').html("Humidity: " + forecastHumidity + "%")
-        .siblings('.forecast-icon').append(forecastIcon);
+        .siblings('.forecast-icon').empty().append(forecastIcon);
 
         index ++;
 
     });
 };
+
+
+// Bug: more than one forecast icon appears if search the same city more than once
