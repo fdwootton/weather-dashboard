@@ -24,7 +24,7 @@ $(".search-button").on("click", function (event) {
         localStorage.setItem("searchItems", JSON.stringify(storedSearchItems));
 
         // Adds the most recent search item (last in array) to the "Search Again:" line on the page
-        $('#search-history').append($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');;
+        $('#search-history').append($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');
 
         
         // Clears the search box after search button is clicked
@@ -108,7 +108,8 @@ function getWeather (userInput) {
 
             setUvIndexColor(uvIndex); //function changes background color of uv-index
 
-            console.log(data.daily[0].temp.min);
+            console.log(data.daily[0].temp.max);
+            console.log(data.daily[0].humidity);
 
             renderForecast(); // function that creates the five-day forecast
 
@@ -119,6 +120,7 @@ function getWeather (userInput) {
             return;
         })   
 };
+
 
 
 
@@ -148,6 +150,7 @@ function setUvIndexColor (uvIndex) {
 
 
 
+
 function renderForecast () {
 
     $('#future-weather').css('display', 'flex') //displays the five blue boxes, centered
@@ -158,54 +161,14 @@ function renderForecast () {
     
     dateLine.each(function () { //displays the date for each blue box
         
+        var forecastTemp = 95
+        var forecastHumidity = 34
         var day = 1;
         var forecastDate = todayDate.add(day, 'days').format("M/D/YYYY");
-        $(this).html(forecastDate).siblings('.forecast-temp').html("Temperature: ").siblings('.forecast-humidity').html("Humidity: ");
+        $(this).html(forecastDate)
+        .siblings('.forecast-temp').html("Temp: " + forecastTemp + " <span>&#176;</span>" + "F")
+        .siblings('.forecast-humidity').html("Humidity: " + forecastHumidity + "%");
         day ++;
     });
 };
-
-// function renderForecastTemp () {
-
-//     var tempLine = $('.forecast-temp');
-
-//     tempLine.each(function () {
-//         // var index = 0
-//         $(this).hmtl("hi");
-//         // index ++;
-//     });
-// }
-    
-
-
-    // displays the weather icon for each blue box
-    
-
-    // var iconLine = $('.forecast-icon');
-
-    // iconLine.each(function(){
-    //     var index = 0;
-    //     var forecastWeatherIcon = $("<img>")
-    //     forecastWeatherIcon.attr("src" , "https://openweathermap.org/img/w/" + data.weather[index].icon + ".png");
-    //     $('.current-weather-icon').empty();
-    //     $('.current-weather-icon').append(forecastWeatherIcon);
-    //     index++;
-    // })
-    
- 
-               
-                
-                // create a div and add forecast box as id
-                // append date as header tag
-                // append img
-                // append temp
-                // append humidity
-                // add data [0] set to i
-
-
-
-// function displayCurrentWeather () {};
-// function getFiveDayForecast () {};
-// function displayFiveDayForecast () {};
-
 
