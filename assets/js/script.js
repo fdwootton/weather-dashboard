@@ -192,6 +192,3 @@ function renderForecast (data) {
 
     });
 };
-
-
-// Bug: more than one forecast icon appears if search the same city more than once
