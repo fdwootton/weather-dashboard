@@ -1,5 +1,7 @@
 const apiKey = "8a73232fcd06372324159654883c0590";
 
+
+
 // ----- When user clicks the search button-------
 $(".search-button").on("click", function (event) {
     event.preventDefault();
@@ -24,10 +26,23 @@ $(".search-button").on("click", function (event) {
         localStorage.setItem("searchItems", JSON.stringify(storedSearchItems));
 
         // Adds the most recent search item (last in array) to the "Search Again:" line on the page
-        $('#search-history').append($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');
-        $('#search-history').children('button').addClass('searched-item');
+        var searchedItemCount = $('#search-history button').length;
+        console.log(searchedItemCount);
 
-        
+        if (searchedItemCount < 6) {
+            $('#search-history').prepend($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');
+            $('#search-history').children('button').addClass('searched-item');
+        }
+
+        // Deletes a previously searched item from the page
+        else {
+            $('#search-history').prepend($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');
+            $('#search-history').children('button').addClass('searched-item');
+            $('#search-history').children().last().remove();
+        }
+
+
+
         // Clears the search box after search button is clicked
         $("input").val(""); 
     }
@@ -41,7 +56,8 @@ $(".search-button").on("click", function (event) {
 
 
 
-// When a previously searched city is clicked:
+
+// ----------When user clicks an city previously searched--------------------
 $("#search-history").on("click", function (event) {
 
     var target = $( event.target );
@@ -56,10 +72,7 @@ $("#search-history").on("click", function (event) {
 
     getWeather(pastUserInput);
 
-
 });
-
-
 
 
 
@@ -132,7 +145,7 @@ function getWeather (userInput) {
         .catch (function (error){
             $('.weather-result').addClass('hide');
             return;
-        })   
+    })   
 };
 
 
