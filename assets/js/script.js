@@ -6,6 +6,8 @@ const apiKey = "8a73232fcd06372324159654883c0590";
 $(".search-button").on("click", function (event) {
     event.preventDefault();
 
+    $('#error-message').addClass('hide'); //hides error message if displayed
+
     var userInput = $(this).siblings("input").val();
     var storedSearchItems = JSON.parse(localStorage.getItem("searchItems"));
 
@@ -60,9 +62,11 @@ $(".search-button").on("click", function (event) {
 // ----------When user clicks an city previously searched--------------------
 $("#search-history").on("click", function (event) {
 
-    var target = $( event.target );
-
     event.preventDefault();
+
+    $('#error-message').addClass('hide'); //hides error message if displayed
+
+    var target = $( event.target );
 
     if (target.is('.searched-item')) {
 
@@ -144,6 +148,11 @@ function getWeather (userInput) {
 
         .catch (function (error){
             $('.weather-result').addClass('hide');
+            $('#search-history').children().first().remove();
+            $('#error-message').empty()
+            .append("<h3> Unable to find city. Please check for spelling errors and try again.</h3>")
+            .removeClass('hide');
+            // $('main').prepend("<h3> Unable to find city. Please check for spelling errors and try again.</h3>")
             return;
     })   
 };
