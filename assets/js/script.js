@@ -127,9 +127,6 @@ function getWeather (userInput) {
 
             setUvIndexColor(uvIndex); //function changes background color of uv-index
 
-            console.log(data.daily[0].temp.max);
-            console.log(data.daily[0].humidity);
-
             renderForecast(data) // function that creates the five-day forecast
 
         })
@@ -180,16 +177,21 @@ function renderForecast (data) {
     var index = 0
 
 
-    dateLine.each(function () { //displays the date for each blue box
+    dateLine.each(function () { //displays the date, temp, and humidity for each blue box
         
+        var forecastDate = todayDate.add(1, 'days').format("M/D/YYYY");
         var forecastTemp = Math.floor((data.daily[index].temp.max));
         var forecastHumidity = (data.daily[index].humidity);
-        var day = 1;
-        var forecastDate = todayDate.add(day, 'days').format("M/D/YYYY");
+
+        var forecastIcon = $("<img>")
+        forecastIcon.attr("src" , "https://openweathermap.org/img/w/" + data.daily[index].weather[0].icon + ".png");
+
         $(this).html(forecastDate)
         .siblings('.forecast-temp').html("Temp: " + forecastTemp + " <span>&#176;</span>" + "F")
-        .siblings('.forecast-humidity').html("Humidity: " + forecastHumidity + "%");
-        day ++;
+        .siblings('.forecast-humidity').html("Humidity: " + forecastHumidity + "%")
+        .siblings('.forecast-icon').append(forecastIcon);
+
         index ++;
+
     });
 };
