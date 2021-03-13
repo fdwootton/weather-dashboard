@@ -49,8 +49,12 @@ $("#search-history").on("click", function (event) {
     event.preventDefault();
 
     if (target.is('.searched-item')) {
-        console.log("button was clicked");
+
+        pastUserInput = target.text();
+        console.log(pastUserInput);
     }
+
+    getWeather(pastUserInput);
 
 
 });
