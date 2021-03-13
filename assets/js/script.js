@@ -130,7 +130,7 @@ function getWeather (userInput) {
             console.log(data.daily[0].temp.max);
             console.log(data.daily[0].humidity);
 
-            renderForecast(); // function that creates the five-day forecast
+            renderForecast(data) // function that creates the five-day forecast
 
         })
 
@@ -170,23 +170,26 @@ function setUvIndexColor (uvIndex) {
 
 
 
-function renderForecast () {
+function renderForecast (data) {
 
     $('#future-weather').css('display', 'flex') //displays the five blue boxes, centered
 
     
     var dateLine = $('.forecast-date');
     var todayDate = moment();
-    
+    var index = 0
+
+
     dateLine.each(function () { //displays the date for each blue box
         
-        var forecastTemp = "--" //(data.daily[index].temp.max); index++
-        var forecastHumidity = "--" // (data.daily[index].humidity); index++
+        var forecastTemp = Math.floor((data.daily[index].temp.max));
+        var forecastHumidity = (data.daily[index].humidity);
         var day = 1;
         var forecastDate = todayDate.add(day, 'days').format("M/D/YYYY");
         $(this).html(forecastDate)
         .siblings('.forecast-temp').html("Temp: " + forecastTemp + " <span>&#176;</span>" + "F")
         .siblings('.forecast-humidity').html("Humidity: " + forecastHumidity + "%");
         day ++;
+        index ++;
     });
 };
