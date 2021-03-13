@@ -69,7 +69,7 @@ function getWeather (userInput) {
             $('.current-weather-icon').append(currentWeatherIcon);
             
 
-            var uvIndexApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&appid=' + apiKey; //API that contains uv-index
+            var uvIndexApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&units=imperial&appid=' + apiKey; //API that contains uv-index
             
             $('.city-name-and-date').html(cityName + " (" + moment().format("M/D/YYYY") + ")");
             $('.current-temp').html("Temperature: " + currentTemp + " <span>&#176;</span>" + "F");
