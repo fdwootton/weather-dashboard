@@ -43,7 +43,6 @@ $(".search-button").on("click", function (event) {
 function getWeather (userInput) {
 
     var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput + '&units=imperial&appid=' + apiKey;
-    var forecastUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily?q=' + userInput + '&cnt=5&appid=' + apiKey;
 
     // First fetch
     fetch(apiUrl)
@@ -97,8 +96,6 @@ function getWeather (userInput) {
 
             setUvIndexColor(uvIndex);
 
-            // Third fetch ----> This fetches URL that contains forecast
-            return fetch(forecastUrl)
         })
 
         .catch (function (error){
@@ -133,8 +130,6 @@ function setUvIndexColor (uvIndex) {
     }
 };
 
-// For five day forecast:
-// api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={cnt}&appid={API key}
 
 
 // function displayCurrentWeather () {};
