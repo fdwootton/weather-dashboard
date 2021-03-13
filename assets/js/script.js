@@ -57,7 +57,7 @@ function getWeather (userInput) {
 
             // variables for current weather
             var cityName = data.name;
-            var currentTemp = data.main.temp;
+            var currentTemp = Math.floor(data.main.temp);
             var currentHumidity = data.main.humidity;
             var windSpeed = data.wind.speed;
 
@@ -86,7 +86,7 @@ function getWeather (userInput) {
 
 
             // Creation of the five-day forecast
-
+            renderForecast();
 
 
             //Second fetch ---> This fetches new API URL that contains uv-index
@@ -144,6 +144,36 @@ function setUvIndexColor (uvIndex) {
 
 
 
+function renderForecast () {
+
+    $('#future-weather').css('display', 'flex') //displays the five blue boxes, centered
+
+    
+    var dateLine = $('.forecast-date');
+    var todayDate = moment();
+    
+    dateLine.each(function () { //displays the date for each blue box
+        
+        var day = 1;
+        var forecastDate = todayDate.add(day, 'days').format("M/D/YYYY");
+        $(this).css('color', 'white').html(forecastDate);
+        day ++;
+    });
+    
+ 
+               
+                
+                // create a div and add forecast box as id
+                // append date as header tag
+                // append img
+                // append temp
+                // append humidity
+                // add data [0] set to i
+};
+
+
 // function displayCurrentWeather () {};
 // function getFiveDayForecast () {};
 // function displayFiveDayForecast () {};
+
+
