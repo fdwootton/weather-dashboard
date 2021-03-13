@@ -44,12 +44,14 @@ $(".search-button").on("click", function (event) {
 // When a previously searched city is clicked:
 $("#search-history").on("click", function (event) {
 
+    var target = $( event.target );
+
     event.preventDefault();
 
-    console.log("button was clicked");
+    if (target.is('.searched-item')) {
+        console.log("button was clicked");
+    }
 
-    // var cityName = $(this).val()
-    // console.log(cityName);
 
 });
 
@@ -58,7 +60,7 @@ $("#search-history").on("click", function (event) {
 
 
 
-// This function uses fetch three times for three different URLs
+// This function uses fetch two times for two different URLs
 function getWeather (userInput) {
 
     var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput + '&units=imperial&appid=' + apiKey;
@@ -80,9 +82,6 @@ function getWeather (userInput) {
             var currentHumidity = data.main.humidity;
             var windSpeed = data.wind.speed;
 
-            // variables for five-day forecast
-            // var dayOne = data.daily[0].temp.max
-
             var latitude = data.coord.lat; //need this data to perform the second fetch
             var longitude = data.coord.lon; //need this data to perform the second fetch
 
@@ -102,11 +101,6 @@ function getWeather (userInput) {
             $('.current-humidity').html("Humidity: " + currentHumidity + "%");
             $('.wind-speed').html("Wind Speed: " + windSpeed + " MPH");
             $('.weather-result').removeClass('hide');
-
-            
-
-
-
 
             //Second fetch ---> This fetches new API URL that contains uv-index
             return fetch(uvIndexApiUrl)
@@ -166,7 +160,7 @@ function setUvIndexColor (uvIndex) {
 
 
 
-
+// Creates the five day forecast
 function renderForecast (data) {
 
     var dateLine = $('.forecast-date');
