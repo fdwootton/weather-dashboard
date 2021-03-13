@@ -160,9 +160,22 @@ function renderForecast () {
         
         var day = 1;
         var forecastDate = todayDate.add(day, 'days').format("M/D/YYYY");
-        $(this).css('color', 'white').html(forecastDate);
+        $(this).html(forecastDate).siblings('.forecast-temp').html("Temperature: ").siblings('.forecast-humidity').html("Humidity: ");
         day ++;
     });
+};
+
+// function renderForecastTemp () {
+
+//     var tempLine = $('.forecast-temp');
+
+//     tempLine.each(function () {
+//         // var index = 0
+//         $(this).hmtl("hi");
+//         // index ++;
+//     });
+// }
+    
 
 
     // displays the weather icon for each blue box
@@ -188,7 +201,7 @@ function renderForecast () {
                 // append temp
                 // append humidity
                 // add data [0] set to i
-};
+
 
 
 // function displayCurrentWeather () {};
