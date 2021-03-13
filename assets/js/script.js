@@ -42,7 +42,7 @@ $(".search-button").on("click", function (event) {
 
 
 // When a previously searched city is clicked:
-$(".searched-item").on("click", function (event) {
+$("#search-history").on("click", function (event) {
 
     event.preventDefault();
 
