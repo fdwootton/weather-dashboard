@@ -143,11 +143,17 @@ function getWeather (userInput) {
 
         // If user types invalid city, error message displays
         .catch (function (error){
+
+            let cityArray = JSON.parse(localStorage.getItem("searchItems"));
+            cityArray.pop(); //removes invalid city 
+            localStorage.setItem('searchItems', JSON.stringify(cityArray)); //resets local storage with invalid city removed
+            
             $('.weather-result').addClass('hide');
             $('#search-history').children().first().remove();
             $('#error-message').empty()
             .append("<h3> Unable to find city. Please check for spelling errors and try again.</h3>")
             .removeClass('hide');
+            
             return;
     })   
 };
