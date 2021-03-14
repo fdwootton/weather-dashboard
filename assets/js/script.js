@@ -151,7 +151,7 @@ function getWeather (userInput) {
             $('.weather-result').addClass('hide');
             $('#search-history').children().first().remove(); //removes invalid city from displaying on page
             $('#error-message').empty()
-            .append("<h3> Unable to find city. Please check for spelling errors and try again.</h3>")
+            .append('<h3> Unable to find city "' + userInput + '" <br/> Please check for spelling errors and try again.</h3>')
             .removeClass('hide');
 
             return;
