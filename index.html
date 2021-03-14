@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en-us">
 
 <head>
 
@@ -10,16 +10,15 @@
 
     <!-- Bootstrap CSS -->
     <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
 
+    <!--Local stylesheet-->
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <title>Weather Dashboard</title>
 
 </head>
-
 
 <body>
 
@@ -30,8 +29,8 @@
               <div class="container-fluid" id="nav-container">
                 <h2 style="color:white">Weather Dashboard</h2>
                 <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search City Name..." aria-label="Search">
-                  <button class="btn btn-outline-success search-button" type="submit">Search</button>
+                  <input class="form-control me-2" type="search" placeholder="Search City Name..." aria-label="Search"> <!--Input area-->
+                  <button class="btn btn-outline-success search-button" type="submit">Search</button> <!--Search button-->
                 </form>
               </div>
             </nav>
@@ -40,7 +39,11 @@
 
     </header>
 
-    <div class="container hide" id="search-history"></div>
+    <div class="container hide" id="search-history"></div> <!--Contains searched items-->
+
+    <div class="hide" id="error-message"></div> <!--Error message, only displays if invalid city is searched-->
+
+    <div class="hide" id="start-message"></div> <!--Landing page message, only displays if page is refreshed-->
 
     <main id="weather-container">
 
@@ -56,7 +59,7 @@
 
         </div>
 
-    </main>
+    
 
         <!-- Contains the Five-Day Forecast -->
         <div class="weather-result hide" id="future-weather">
@@ -101,7 +104,8 @@
           
         </div>
 
-    <div class="hide" id="error-message"></div>
+    </main>
+    
   
 
   <!-- Moment.js -->

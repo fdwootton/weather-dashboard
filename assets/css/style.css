@@ -9,10 +9,9 @@ a {
 
 #search-history {
   margin-top: 0;
-  width: 875px;
+  width: 885px;
 }
 
-/* rgb(101, 142, 255); */
 .searched-item {
   margin-right: 15px;
   background-color: rgb(33, 192, 60);
@@ -27,6 +26,14 @@ a {
 
 .searched-item:hover {
   opacity: 80%;
+}
+
+#start-message {
+  text-align: center;
+}
+
+#error-message {
+  text-align: center;
 }
 
 #weather-container {
