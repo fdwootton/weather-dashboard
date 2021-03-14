@@ -52,6 +52,7 @@ a {
 #future-weather {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .forecast-box {
