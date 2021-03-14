@@ -149,11 +149,11 @@ function getWeather (userInput) {
             localStorage.setItem('searchItems', JSON.stringify(cityArray)); //resets local storage with invalid city removed
             
             $('.weather-result').addClass('hide');
-            $('#search-history').children().first().remove();
+            $('#search-history').children().first().remove(); //removes invalid city from displaying on page
             $('#error-message').empty()
             .append("<h3> Unable to find city. Please check for spelling errors and try again.</h3>")
             .removeClass('hide');
-            
+
             return;
     })   
 };
