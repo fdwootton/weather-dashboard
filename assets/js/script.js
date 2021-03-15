@@ -8,30 +8,35 @@ $().ready(function () {
     // When the page first loads, start message is displayed
     $('#start-message').removeClass('hide hidden').append('<h2> Enter city name above to view <br/> current weather & five-day forecast <h2>');
 
-    // Loads previously searched city names
-    if (storedSearchItems) {
-
-        if (storedSearchItems.length < 7) { //limits the number of previously searched city names on page
-
-            for(i=0; i<storedSearchItems.length - 1; i++) {
-                $('#search-history').prepend($("<button> " + storedSearchItems[i] + " </button>")).removeClass('hide');
-                $('#search-history').children('button').addClass('searched-item');
-            }
-        }
-
-        else {
-
-            for(i=0; i<6; i++) {
-                $('#search-history').prepend($("<button> " + storedSearchItems[i] + " </button>")).removeClass('hide');
-                $('#search-history').children('button').addClass('searched-item');
-            }
-        }
-
-        // Added this line because of a bug that deletes first search item, this adds it back to the page
-        $('#search-history').prepend($("<button> " + storedSearchItems[storedSearchItems.length-1] + " </button>")).removeClass('hide');
-        $('#search-history').children('button').addClass('searched-item');
-    }
+    renderSearchHistory();
 }) 
+
+
+function renderSearchHistory () { // Loads previously searched city names
+     
+        if (storedSearchItems) {
+
+            if (storedSearchItems.length < 7) { //limits the number of previously searched city names on page
+    
+                for(i=0; i<storedSearchItems.length - 1; i++) {
+                    $('#search-history').prepend($("<button> " + storedSearchItems[i] + " </button>")).removeClass('hide');
+                    $('#search-history').children('button').addClass('searched-item');
+                }
+            }
+    
+            else {
+    
+                for(i=0; i<6; i++) {
+                    $('#search-history').prepend($("<button> " + storedSearchItems[i] + " </button>")).removeClass('hide');
+                    $('#search-history').children('button').addClass('searched-item');
+                }
+            }
+    
+            // Added this line because of a bug that deletes first search item, this adds it back to the page
+            $('#search-history').prepend($("<button> " + storedSearchItems[storedSearchItems.length-1] + " </button>")).removeClass('hide');
+            $('#search-history').children('button').addClass('searched-item');
+        }
+}
 
 
 function clearSearchHistory () { //Local storage and search history is cleared
