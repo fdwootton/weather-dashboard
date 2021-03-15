@@ -109,7 +109,7 @@ $("#search-history").on("click", function (event) {
 
     if (target.is('.searched-item')) { //handles the click
 
-        var pastUserInput = target.text(); // <<<<< BUG 
+        var pastUserInput = target.text();
 
         getWeather(pastUserInput); //function retrieves weather data and renders it on page
     } 
