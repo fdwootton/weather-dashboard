@@ -12,6 +12,17 @@ $().ready(function () {
 }) 
 
 
+$(".search-button").on("click", searchCityName); //CLICK EVENT: When user clicks the search button
+
+
+$('.far').on('click', clearSearchHistory); // CLICK EVENT: clears local storage and search history when user clicks X
+
+
+$("#search-history").on("click", searchPreviousItem); // CLICK EVENT: When user clicks a city previously searched
+
+
+// -------------------------------FUNCTIONS-----------------------------------
+
 function renderSearchHistory () { // Loads previously searched city names
      
         if (storedSearchItems) {
@@ -47,12 +58,7 @@ function clearSearchHistory () { //Local storage and search history is cleared
 }
 
 
-$('.far').on('click', clearSearchHistory); // CLICK EVENT to clear local storage and search history
-
-
-
-// ----- When user clicks the search button-------
-$(".search-button").on("click", function (event) {
+function searchCityName (event) {
 
     event.preventDefault();
 
@@ -99,11 +105,10 @@ $(".search-button").on("click", function (event) {
     else {
         return;
     }
-});
+};
 
 
-// ----------When user clicks a city previously searched--------------------
-$("#search-history").on("click", function (event) {
+function searchPreviousItem (event) {
 
     event.preventDefault();
 
@@ -118,7 +123,7 @@ $("#search-history").on("click", function (event) {
 
         getWeather(pastUserInput); //function retrieves weather data and renders it on page
     } 
-});
+}
 
 
 // This function retrieves weather data from APIs and renders it on page
@@ -203,8 +208,7 @@ function getWeather (userInput) {
 };
 
 
-// The background color of the UV-Index changes based on severity
-function setUvIndexColor (uvIndex) {
+function setUvIndexColor (uvIndex) { // The background color of the UV-Index changes based on severity
 
     if (uvIndex >= 11) {
         $('.uv-index span').html(uvIndex).css('background-color' , 'violet');
@@ -228,8 +232,7 @@ function setUvIndexColor (uvIndex) {
 };
 
 
-// Creates the five day forecast
-function renderForecast (data) {
+function renderForecast (data) { // Creates the five day forecast
 
     var dateLine = $('.forecast-date');
     var todayDate = moment();
