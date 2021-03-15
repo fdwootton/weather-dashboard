@@ -72,7 +72,6 @@ $(".search-button").on("click", function (event) {
         localStorage.setItem("searchItems", JSON.stringify(storedSearchItems)); // Puts user input into local storage
 
         var searchedItemCount = $('#search-history button').length; // Adds the most recent search item (last in array) to search history
-        console.log(searchedItemCount);
 
         // limits the number of searched items displayed on page to 6 items
         if (searchedItemCount < 6) {
