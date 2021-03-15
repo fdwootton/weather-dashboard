@@ -94,7 +94,6 @@ function searchCityName (event) {
         else {
             $('#search-history').prepend($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');
             $('#search-history').children('button').addClass('searched-item');
-            // $('#search-history').children().last().remove();
             $('#search-history button').last().remove();
         }
 
