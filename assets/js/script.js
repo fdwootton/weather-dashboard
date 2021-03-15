@@ -42,7 +42,7 @@ function clearSearchHistory () { //Local storage and search history is cleared
 }
 
 
-$('.far').on('click', clearSearchHistory); // Click event to clear local storage and search history
+$('.far').on('click', clearSearchHistory); // CLICK EVENT to clear local storage and search history
 
 
 
@@ -109,11 +109,10 @@ $("#search-history").on("click", function (event) {
 
     if (target.is('.searched-item')) { //handles the click
 
-        pastUserInput = target.text(); // <<<<< BUG 
-        console.log(pastUserInput);
-    }
+        var pastUserInput = target.text(); // <<<<< BUG 
 
-    getWeather(pastUserInput); //function retrieves weather data and renders it on page
+        getWeather(pastUserInput); //function retrieves weather data and renders it on page
+    } 
 });
 
 
