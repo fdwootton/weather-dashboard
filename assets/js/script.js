@@ -1,10 +1,49 @@
 const apiKey = "8a73232fcd06372324159654883c0590";
+var storedSearchItems = JSON.parse(localStorage.getItem("searchItems"));
 
 
-// When the page first loads, start message is displayed
+// When the page loads or is refreshed:
 $().ready(function () {
-    $('#start-message').removeClass('hide').append('<h2> Enter city name above to view <br/> current weather & five-day forecast <h2>');
+
+    // When the page first loads, start message is displayed
+    $('#start-message').removeClass('hide hidden').append('<h2> Enter city name above to view <br/> current weather & five-day forecast <h2>');
+
+    // Loads previously searched city names
+    if (storedSearchItems) {
+
+        if (storedSearchItems.length < 7) { //limits the number of previously searched city names on page
+
+            for(i=0; i<storedSearchItems.length - 1; i++) {
+                $('#search-history').prepend($("<button> " + storedSearchItems[i] + " </button>")).removeClass('hide');
+                $('#search-history').children('button').addClass('searched-item');
+            }
+        }
+
+        else {
+
+            for(i=0; i<6; i++) {
+                $('#search-history').prepend($("<button> " + storedSearchItems[i] + " </button>")).removeClass('hide');
+                $('#search-history').children('button').addClass('searched-item');
+            }
+        }
+
+        // Added this line because of a bug that deletes first search item, this adds it back to the page
+        $('#search-history').prepend($("<button> " + storedSearchItems[storedSearchItems.length-1] + " </button>")).removeClass('hide');
+        $('#search-history').children('button').addClass('searched-item');
+    }
 }) 
+
+
+function clearSearchHistory () { //Local storage and search history is cleared
+    localStorage.clear();
+    storedSearchItems=[]; 
+    $('#search-history button').remove();
+    $('#search-history').addClass('hide');
+}
+
+
+$('.far').on('click', clearSearchHistory); // Click event to clear local storage and search history
+
 
 
 // ----- When user clicks the search button-------
@@ -16,7 +55,6 @@ $(".search-button").on("click", function (event) {
     $('#start-message').empty().addClass('hide'); //hides landing page message
 
     var userInput = $(this).siblings("input").val();
-    var storedSearchItems = JSON.parse(localStorage.getItem("searchItems"));
 
     if (userInput) { 
         
@@ -34,9 +72,10 @@ $(".search-button").on("click", function (event) {
         localStorage.setItem("searchItems", JSON.stringify(storedSearchItems)); // Puts user input into local storage
 
         var searchedItemCount = $('#search-history button').length; // Adds the most recent search item (last in array) to search history
+        console.log(searchedItemCount);
 
         // limits the number of searched items displayed on page to 6 items
-        if (searchedItemCount < 7) {
+        if (searchedItemCount < 6) {
             $('#search-history').prepend($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');
             $('#search-history').children('button').addClass('searched-item');
         }
@@ -45,7 +84,8 @@ $(".search-button").on("click", function (event) {
         else {
             $('#search-history').prepend($("<button> " + storedSearchItems[storedSearchItems.length - 1] + " </button>")).removeClass('hide');
             $('#search-history').children('button').addClass('searched-item');
-            $('#search-history').children().last().remove();
+            // $('#search-history').children().last().remove();
+            $('#search-history button').last().remove();
         }
 
         $("input").val(""); // Clears the search box after search button is clicked
@@ -64,12 +104,13 @@ $("#search-history").on("click", function (event) {
     event.preventDefault();
 
     $('#error-message').empty().addClass('hide'); //hides error message if displayed and empties it
+    $('#start-message').addClass('hidden') // hides loading page message
 
     var target = $( event.target );
 
     if (target.is('.searched-item')) { //handles the click
 
-        pastUserInput = target.text();
+        pastUserInput = target.text(); // <<<<< BUG 
         console.log(pastUserInput);
     }
 
@@ -144,12 +185,12 @@ function getWeather (userInput) {
         // If user types invalid city, error message displays
         .catch (function (error){
 
-            let cityArray = JSON.parse(localStorage.getItem("searchItems"));
-            cityArray.pop(); //removes invalid city 
-            localStorage.setItem('searchItems', JSON.stringify(cityArray)); //resets local storage with invalid city removed
+            storedSearchItems.pop(); //removes invalid city 
+            localStorage.setItem('searchItems', JSON.stringify(storedSearchItems)); //resets local storage with invalid city removed
             
             $('.weather-result').addClass('hide');
             $('#search-history').children().first().remove(); //removes invalid city from displaying on page
+            $('#search-history').addClass('hide');
             $('#error-message').empty()
             .append('<h3> Unable to find city "' + userInput + '" <br/> Please check for spelling errors and try again.</h3>')
             .removeClass('hide');

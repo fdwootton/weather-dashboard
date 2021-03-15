@@ -75,10 +75,18 @@ a {
   visibility: hidden;
 }
 
+.hidden {
+  display:none;
+}
+
 .uv-index span {
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 5px;
+}
+
+.far:hover {
+  color: red;
 }
 
 @media (min-width: 576px) {
